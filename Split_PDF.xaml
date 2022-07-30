@@ -1,14 +1,11 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Split_PDF" this:Split_PDF.in_PDFPath="C:\Users\HP\OneDrive\Documents\UiPath\IACET_Dispatcher\Data\Temp\" this:Split_PDF.in_PDFFileName="IACET Details.pdf" this:Split_PDF.in_SFolder="C:\Users\HP\OneDrive\Documents\UiPath\IACET_Dispatcher\Data\Input\SFolder\" this:Split_PDF.in_NSFolder="C:\Users\HP\OneDrive\Documents\UiPath\IACET_Dispatcher\Data\Input\NSFolder\" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upap="clr-namespace:UiPath.PDF.Activities.PDF;assembly=UiPath.PDF.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Split_PDF" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upap="clr-namespace:UiPath.PDF.Activities.PDF;assembly=UiPath.PDF.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_PDFPath" Type="InArgument(x:String)" />
-    <x:Property Name="in_PDFFileName" Type="InArgument(x:String)" />
-    <x:Property Name="in_SFolder" Type="InArgument(x:String)" />
-    <x:Property Name="in_NSFolder" Type="InArgument(x:String)" />
+    <x:Property Name="in_ConfigSplitPDF" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>907,1532</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>907,1644</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Split_PDF_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="56">
@@ -41,6 +38,7 @@
       <x:String>System.Reflection</x:String>
       <x:String>System.Activities.DynamicUpdate</x:String>
       <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -72,10 +70,10 @@
       <AssemblyReference>NPOI</AssemblyReference>
       <AssemblyReference>UiPath.Platform</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Split_PDF" sap:VirtualizedContainerService.HintSize="917,1467" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Split_PDF" sap:VirtualizedContainerService.HintSize="917,1579" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="int_PageCount" />
       <Variable x:TypeArguments="x:Int32" Default="1" Name="int_Counter" />
@@ -86,54 +84,10 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="875,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Split of PDF Start&quot;]" />
-    <upap:GetPDFPageCount DisplayName="Get PDF Page Count" FileName="[in_PDFPath+in_PDFFileName]" sap:VirtualizedContainerService.HintSize="875,59" sap2010:WorkflowViewState.IdRef="GetPDFPageCount_1" PageCount="[int_PageCount]" />
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="875,51" sap2010:WorkflowViewState.IdRef="CommentOut_1">
-      <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="454,143" sap2010:WorkflowViewState.IdRef="Sequence_6">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[int_Counter&lt;=int_PageCount]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
-            <ui:InterruptibleDoWhile.Body>
-              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,410" sap2010:WorkflowViewState.IdRef="Sequence_2">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <upap:ExtractPDFPageRange DisplayName="Extract PDF Page Range" FileName="[in_PDFPath+in_PDFFileName]" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExtractPDFPageRange_1" OutputFileName="[in_PDFPath+int_Counter.ToString+&quot;.PDF&quot;]" Range="[int_Counter.ToString+&quot;-&quot;+int_Counter.ToString]" />
-                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[in_PDFPath+int_Counter.ToString+&quot;.PDF&quot;]" />
-                <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-                  <Assign.To>
-                    <OutArgument x:TypeArguments="x:Int32">[int_Counter]</OutArgument>
-                  </Assign.To>
-                  <Assign.Value>
-                    <InArgument x:TypeArguments="x:Int32">[int_Counter+1]</InArgument>
-                  </Assign.Value>
-                </Assign>
-              </Sequence>
-            </ui:InterruptibleDoWhile.Body>
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-          </ui:InterruptibleDoWhile>
-        </Sequence>
-      </ui:CommentOut.Body>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:CommentOut>
-    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[int_Counter&lt;=int_PageCount]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="875,923" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
+    <upap:GetPDFPageCount DisplayName="Get PDF Page Count" FileName="[in_ConfigSplitPDF(&quot;TempFolderPath&quot;).ToString+&quot;\&quot;+in_ConfigSplitPDF(&quot;PDFSheetName&quot;).ToString]" sap:VirtualizedContainerService.HintSize="875,59" sap2010:WorkflowViewState.IdRef="GetPDFPageCount_1" PageCount="[int_PageCount]" />
+    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Split the PDF in to 2 parts ( S Folder and NS Folder) " Condition="[int_Counter&lt;=int_PageCount]" DisplayName="Do While" sap:VirtualizedContainerService.HintSize="875,1126" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
       <ui:InterruptibleDoWhile.Body>
-        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="839,758" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="839,930" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:String" Name="str_PdfText" />
           </Sequence.Variables>
@@ -142,28 +96,36 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:ReadPDFText PreserveFormatting="{x:Null}" DisplayName="Read PDF Text" FileName="[in_PDFPath+in_PDFFileName]" sap:VirtualizedContainerService.HintSize="797,59" sap2010:WorkflowViewState.IdRef="ReadPDFText_1" Range="All" Text="[str_PdfText]" />
-          <If Condition="[str_PdfText.Length&gt;1]" sap:VirtualizedContainerService.HintSize="797,467" sap2010:WorkflowViewState.IdRef="If_1">
+          <ui:ReadPDFText PreserveFormatting="{x:Null}" DisplayName="Read PDF Text" FileName="[in_ConfigSplitPDF(&quot;TempFolderPath&quot;).ToString+&quot;\&quot;+in_ConfigSplitPDF(&quot;PDFSheetName&quot;).ToString]" sap:VirtualizedContainerService.HintSize="797,59" sap2010:WorkflowViewState.IdRef="ReadPDFText_1" Range="[int_Counter.ToString]" Text="[str_PdfText]" />
+          <If sap2010:Annotation.AnnotationText="" Condition="[str_PdfText.Contains(&quot;Name&quot;)]" sap:VirtualizedContainerService.HintSize="797,639" sap2010:WorkflowViewState.IdRef="If_1">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="376,310" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <Sequence sap2010:Annotation.AnnotationText="PDF readable then move to S folder&#xD;&#xA;" sap:VirtualizedContainerService.HintSize="376,451" sap2010:WorkflowViewState.IdRef="Sequence_4">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
+                <ui:ReadPDFText PreserveFormatting="{x:Null}" Text="{x:Null}" DisplayName="Read PDF Text" FileName="[in_ConfigSplitPDF(&quot;TempFolderPath&quot;).ToString+&quot;\&quot;+in_ConfigSplitPDF(&quot;PDFSheetName&quot;).ToString]" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ReadPDFText_2" Range="All" />
                 <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[int_Counter.ToString+&quot;File is Readable&quot;]" />
-                <upap:ExtractPDFPageRange DisplayName="Extract PDF Page Range" FileName="[in_PDFPath+in_PDFFileName]" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExtractPDFPageRange_2" OutputFileName="[in_SFolder+int_Counter.ToString+&quot;.PDF&quot;]" Range="[int_Counter.ToString+&quot;-&quot;+int_Counter.ToString]" />
+                <upap:ExtractPDFPageRange DisplayName="Extract PDF Page Range" FileName="[in_ConfigSplitPDF(&quot;TempFolderPath&quot;).ToString+&quot;\&quot;+in_ConfigSplitPDF(&quot;PDFSheetName&quot;).ToString]" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExtractPDFPageRange_2" OutputFileName="[in_ConfigSplitPDF(&quot;Sfolder&quot;).ToString+&quot;\&quot;+int_Counter.ToString+&quot;.PDF&quot;]" Range="[int_Counter.ToString+&quot;-&quot;+int_Counter.ToString]" />
               </Sequence>
             </If.Then>
             <If.Else>
-              <Sequence sap:VirtualizedContainerService.HintSize="376,310" sap2010:WorkflowViewState.IdRef="Sequence_5">
+              <Sequence sap2010:Annotation.AnnotationText="PDF is not readable then move to NS Folder&#xD;&#xA;&#xD;&#xA;" sap:VirtualizedContainerService.HintSize="376,367" sap2010:WorkflowViewState.IdRef="Sequence_5">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;File is  Not Readable&quot;]" />
-                <upap:ExtractPDFPageRange DisplayName="Extract PDF Page Range" FileName="[in_PDFPath+in_PDFFileName]" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExtractPDFPageRange_3" OutputFileName="[in_NSFolder+int_Counter.ToString+&quot;.PDF&quot;]" Range="[int_Counter.ToString+&quot;-&quot;+int_Counter.ToString]" />
+                <upap:ExtractPDFPageRange DisplayName="Extract PDF Page Range" FileName="[in_ConfigSplitPDF(&quot;TempFolderPath&quot;).ToString+&quot;\&quot;+in_ConfigSplitPDF(&quot;PDFSheetName&quot;).ToString]" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExtractPDFPageRange_3" OutputFileName="[in_ConfigSplitPDF(&quot;NSFolder&quot;).ToString+&quot;\&quot;+int_Counter.ToString+&quot;.PDF&quot;]" Range="[int_Counter.ToString+&quot;-&quot;+int_Counter.ToString]" />
               </Sequence>
             </If.Else>
           </If>
@@ -177,6 +139,11 @@
           </Assign>
         </Sequence>
       </ui:InterruptibleDoWhile.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </ui:InterruptibleDoWhile>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="875,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Split of PDF Stop&quot;]" />
   </Sequence>
